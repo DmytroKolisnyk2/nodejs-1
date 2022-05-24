@@ -1,0 +1,6 @@
+{
+  "ignore": [
+    "./db/contacts.json",
+    "README.md"
+  ]
+}
