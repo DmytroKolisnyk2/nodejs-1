@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <%- include('layouts/head') %>
+
+  <body>
+    <%- include('layouts/navbar') %>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <ul class="list-group">
+
+            <% contacts.forEach((contact) => { %>
+              <li class="list-group-item">
+                <h3><%= contact.name %></h3>
+                <p><%= contact.phone %></p>
+                <p><%= contact.address %></p>
+                
+                <a href="/delete/<%= contact.id %>" class="btn btn-danger">Видалити</a>
+                <a href="/contact/<%= contact.id %>" class="btn btn-outline-primary">Переглянути</a>
+              </li>
+            <% }); %>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

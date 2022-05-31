@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <%- include('layouts/head') %>
+
+  <body>
+    <%- include('layouts/navbar') %>
+
+    <div class="container justify-content-center d-flex">
+      <div class="row w-75">
+        <div class="list-group-item d-flex justify-content-around align-items-center p-4">
+          <div class="flex-grow-1 w-75">
+            <div class="d-flex align-items-baseline">
+              <h3>Ім'я:</h3>
+              <p class="fs-4 m-1"><%= contact.name %></p>
+            </div>
+            <%if(contact.phone){%>
+            <div class="d-flex align-items-baseline">
+              <h3>Номер:</h3>
+              <p class="fs-4 m-1 fw-light"><%= contact.phone %></p>
+            </div>
+            <%};%> 
+            <%if(contact.address){%>
+            <div class="d-flex align-items-baseline">
+              <h3>Адреса:</h3>
+              <p class="fs-4 m-1 fw-light"><%= contact.address %></p>
+            </div>
+            <%};%>
+          </div>
+          <div class="d-flex flex-column h-200">
+            <a href="/delete/<%= contact.id %>" class="btn btn-danger mb-3">Видалити</a>
+            <a href="/" class="btn btn-outline-primary">Контакти</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

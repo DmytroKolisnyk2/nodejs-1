@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <%- include('layouts/head') %>
+  <body>
+    <%- include('layouts/navbar') %>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <form action="/create" method="post">
+            <div class="mb-3">
+              <label class="form-label" for="name">Ім'я</label>
+              <input
+                class="form-control"
+                type="text"
+                autocomplete="off"
+                name="name"
+                id="name"
+                placeholder="Ім'я"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="phone">Номер телефону</label>
+              <input
+                class="form-control"
+                type="tel"
+                name="phone"
+                id="phone"
+                placeholder="Телефон"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="address">Адреса проживання</label>
+              <input
+                class="form-control"
+                type="text"
+                autocomplete="street-address"
+                name="address"
+                id="address"
+                placeholder="Адреса проживання"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Додати</button>
+            <a href="/" class="btn btn-outline-primary">Контакти</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
