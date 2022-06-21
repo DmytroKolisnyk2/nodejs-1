@@ -1,6 +1,3 @@
 {
-  "ignore": [
-    "./db/contacts.json",
-    "README.md"
-  ]
+  "ignore": ["node_modules", "models/contacts.json"]
 }
