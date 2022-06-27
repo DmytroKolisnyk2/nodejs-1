@@ -10,7 +10,7 @@ const schema = Joi.object({
 
 const router = express.Router()
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   try {
     const contacts = await listContacts();
     if (!contacts) throw new Error();
@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:contactId', async (req, res, next) => {
+router.get('/:contactId', async (req, res) => {
   try {
     const contact = await getContactById(req.params.contactId);
     if (!contact) throw new Error();
@@ -30,17 +30,18 @@ router.get('/:contactId', async (req, res, next) => {
   }
 })
 
-router.delete('/:contactId', async (req, res, next) => {
+router.delete('/:contactId', async (req, res) => {
   try {
-    const deletedContact = await removeContact(req.params.contactId);
+    const deletedContact = await getContactById(req.params.contactId);
     if (!deletedContact) throw new Error();
+    removeContact(req.params.contactId);
     res.status(200).json({ "message": "contact deleted" })
   } catch (err) {
     res.status(404).json({ "message": "Not found" })
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
   try {
     const validatedBody = schema.validate(req.body);
     if (validatedBody.error) throw new Error(`missing required ${validatedBody.error.details[0].path[0]} field`)
@@ -52,10 +53,14 @@ router.post('/', async (req, res, next) => {
 })
 
 
-router.put('/:contactId', async (req, res, next) => {
+router.put('/:contactId', async (req, res) => {
   try {
     const validatedBody = schema.validate(req.body);
     if (validatedBody.error) throw new Error(`missing fields`);
+
+    const shouldUpdateContact = await getContactById(req.params.contactId);
+    if (!shouldUpdateContact) throw new Error('Not found');
+
     const newContact = await updateContact(req.params.contactId, req.body);
     res.status(200).json(newContact);
   } catch (err) {

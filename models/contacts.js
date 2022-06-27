@@ -37,7 +37,7 @@ const addContact = async (body) => {
 const updateContact = async (contactId, body) => {
   const contacts = JSON.parse(await fs.readFile(contactsPath));
   const shouldUpdateContact = contacts.find((item) => item.id === contactId);
-  if (!shouldUpdateContact) throw new Error('Not found');
+
   filteredContacts = contacts.filter((item) => item.id !== contactId);
   const updatedContact = { ...shouldUpdateContact, ...body }
   filteredContacts.push(updatedContact)
